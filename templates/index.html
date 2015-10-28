@@ -1,17 +1,88 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="../static/js/angular.min.js"></script>
-    <script type="text/javascript" src="../static/js/app.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Choice Hotels Feature Flag Console</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css"/>
+    <script type="text/javascript" src="/static/js/angular.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/app.js"></script>
   </head>
-  <body ng-app="myApp">
-    <div>
-      <label>Name:</label>
-      <input type="text" ng-model="name" placeholder="Enter a name here">
-      <hr>
-      <h1 class="ng-binding">Hello [[name]]!</h1>
+  <!-- Top level controller is the FlagsController because the SystemsController
+  and ApplicationsController both need to be able to get a reference to the flags
+  controller to set the system and application, which affects the flags displayed. -->
+  <body ng-app="FlagConsole" ng-controller="FlagsController as flags">
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Feature Flag Console</a>
+          </div>
+          <!-- The second level controller is the ApplicationsController. The SystemsController needs
+          to be underneath it so that it has a reference to the ApplicationController, so that it
+          can update the system when that is changed and the ApplicationController can load the applications
+          for that new system. -->
+          <div id="navbar" class="navbar-collapse collapse" ng-controller="ApplicationsController as applications">
+            <ul class="nav navbar-nav">
+              <!-- Lowest level controller is the SystemsController -->
+              <li class="dropdown" ng-controller="SystemsController as systems">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[[applications.systemText()]] <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <!-- On click must set the system in the application controller to load the right applications,
+                  but must also set the application to null in the FlagsController to void the currently loaded
+                  list of feature flags. -->
+                  <li ng-repeat="system in systems.systems"><a href="#" ng-click="applications.setSystem(system); flags.setApplication(system, null)">[[system]]</a></li>
+                </ul>
+              </li>
+              <li class="dropdown" ng-class="{ disabled:applications.system === null }">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[[flags.applicationText()]] <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="app in applications.applications"><a href="#" ng-click="flags.setApplication(applications.system, app)">[[app]]</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div id="flags" class="row list-group">
+        <div class="item col-xs-4 col-lg-4" ng-repeat="flag in flags.flags">
+          <div class="thumbnail">
+            <div class="caption">
+              <h4 class="group inner list-group-item-heading">[[flag.name]]</h4>
+              <p class="group inner list-group-item-text">[[flag.description]]</p>
+            </div>
+            <div class="row details">
+              <div class="col-md-2">
+                <p>Default status: <b>[[flag.default | renderstatus]]</b></p>
+              </div>
+              <div class="col-md-2">
+                <p>Current status: <b>[[flag.current | renderstatus]]</b></p>
+              </div>
+              <div class="col-md-2">
+                <p>Used by:
+                  <a class="team" href="#" ng-repeat="team in flag.used_by">[[team]]</a>
+                </p>
+              </div>
+              <div class="col-md-5">
+                <p>Affects:
+                  <a class="team" href="#" ng-repeat="team in flag.affects">[[team]]</a>
+                </p>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-warning">Modify</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

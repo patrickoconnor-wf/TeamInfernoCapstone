@@ -1,0 +1,62 @@
+[
+  {
+    "system": "choicehotels.com",
+    "application": "choicehotels.com",
+    "name": "RATESTABS",
+    "description": "Enables rate plan tabs on the rates page",
+    "default": false,
+    "current": null,
+    "used_by": ["GateKeepers"],
+    "affects": ["GateKeepers", "Keymasters", "CH.COM SiteOp", "Kraken", "Gladiators", "Hydra", "Jedi Masters", "Do-Not-Disturb", "Ch.com Stabilization", "Realists", "S.H.I.E.L.D."]
+  },
+  {
+    "system": "choicehotels.com",
+    "application": "choicehotels.com",
+    "name": "GOOGLEWALLET",
+    "description": "Enables or disables the Google Wallet payment option on checkout",
+    "default": true,
+    "current": null,
+    "used_by": ["Team R&R"],
+    "affects": ["R&R", "CH.COM SiteOp", "Kraken", "Gladiators", "Hydra", "Jedi Masters", "Do-Not-Disturb", "Ch.com Stabilization", "Realists", "S.H.I.E.L.D."]
+  },
+  {
+    "system": "Mobile apps",
+    "application": "Android",
+    "name": "Enable PPC",
+    "description": "Enables or disables purchases with CP points and cash",
+    "default": true,
+    "current": null,
+    "used_by": ["Team Mobile"],
+    "affects": ["Mobile", "Hydra", "Jedi Masters", "S.H.I.E.L.D.", "Do-Not-Disturb", "Realists", "Gladiators"]
+  },
+  {
+    "system": "Mobile apps",
+    "application": "iOS",
+    "name": "IBeacon Allow Anytime",
+    "description": "Enables or disables IBeacon advertisement for participating properties",
+    "default": false,
+    "current": null,
+    "used_by": ["Team Mobile"],
+    "affects": ["Mobile", "Hydra", "Jedi Masters", "S.H.I.E.L.D.", "Do-Not-Disturb", "Realists"]
+  },
+  {
+    "system": "CRS",
+    "application": "CRS",
+    "name": "feature.tokenization_nocredit",
+    "description": "Removes credit cards from CRS database",
+    "default": true,
+    "current": true,
+    "used_by": ["Team Realists"],
+    "affects": ["Realists", "Wolfpack", "Lione", "A-team", "Jedi Masters", "Hydra", "Mobile", "Do-Not-Disturb", "R&R", "Gladiators", "Ch.com Stabilization", "S.H.I.E.L.D.", "Kraken", "Site Optimization"]
+  },
+  {
+    "system": "CIS",
+    "application": "ciscore",
+    "name": "feature.ciscore.customeraccounts.passwordhashing.enabled",
+    "description": "Enables password hashing as described in US34538",
+    "default": true,
+    "current": true,
+    "used_by": ["Team S.H.I.E.L.D."],
+    "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+  }
+]
