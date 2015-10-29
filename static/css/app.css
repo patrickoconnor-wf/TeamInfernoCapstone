@@ -1,0 +1,28 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.item {
+  width: 100%;
+}
+
+.row.details {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.team {
+  border: 1px solid #E4EDF4;
+  border-radius: 6px;
+  background-color: #E4EDF4;
+  display: inline;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
