@@ -638,5 +638,195 @@
         "current": false,
         "used_by": ["Realists"],
         "affects": ["Realists", "WOlfpack", "Lions", "A-Team", "Jedi Masters"]
+    },
+    {
+        "system": "JRCS",
+        "application": "JRCS",
+        "name": "jcrs_Token",
+        "description": "Enables tokenization of credit cards in JCRS",
+        "default": false,
+        "current": false,
+        "used_by": ["Realists"],
+        "affects": ["Realists", "WOlfpack", "Lions", "A-Team", "Jedi Masters", "Hydra", "Mobile", "Do-Not-DISturb", "R&R", "Gladiators", "Ch.com Stabilization", "S.H.I.E.L.D.", "Kraken", "Site Optimization"]
+    },
+    {
+        "system": "CIS",
+        "application": "ciscore",
+        "name": "feature.ciscore.customeraccounts.customerlockoutlogging.enabled",
+        "description": "Enables logging of temporary or permanent customer account lockouts",
+        "default": true,
+        "current": true,
+        "used_by": ["S.H.I.E.L.D."],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "ciscore",
+        "name": "feature.ciscore.customeraccounts.infosecurityteamlogging.enabled",
+        "description": "Enables logging of temporary or customer profile chang information to a log monitored by Info Sec team",
+        "default": true,
+        "current": true,
+        "used_by": ["S.H.I.E.L.D."],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "ciscore",
+        "name": "feature.ciscore.customeraccounts.profilechangelogging.enabled",
+        "description": "Enables logging of customer  profile change information to a standard log (not monitored by Info Sec)",
+        "default": true,
+        "current": true,
+        "used_by": ["S.H.I.E.L.D."],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "ciscore",
+        "name": "feature.ciscore.customeraccounts.sendcustomerlockoutalerts.enabled",
+        "description": "Enables sending customers email alerts when online profile is temporarily or permanently locked",
+        "default": true,
+        "current": true,
+        "used_by": ["S.H.I.E.L.D."],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "ciscore",
+        "name": "feature.ciscore.customeraccounts.sendcustomerprofilechangealerts.enabled",
+        "description": "Enables sending customers email alerts when their profile is changed",
+        "default": true,
+        "current": true,
+        "used_by": ["S.H.I.E.L.D."],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "ciscore",
+        "name": "feature.ciscore.customeraccounts.sendprodmodecustomeralerts.enabled",
+        "description": "When set to true, all email address domains are acceptable and will be sent account-related alerts with the production-approved text. When set to false, only Choice domain (choicehotels.com_ email addresses are sent alerts with some text environment indicator text injected",
+        "default": true,
+        "current": true,
+        "used_by": ["S.H.I.E.L.D."],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "ciscore",
+        "name": "feature.ciscore.customeraccounts.smultifactorlogin.enabled",
+        "description": "Enables checking login app against customer stored apps, and checks for valid referral value (ex recaptcha)",
+        "default": false,
+        "current": false,
+        "used_by": ["S.H.I.E.L.D."],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "ismgt",
+        "name": "feature.idmgt.guestdirectcommunications.mobilephone.enabled",
+        "description": "Enables the use of mobile phone in identity managment",
+        "default": false,
+        "current": null,
+        "used_by": ["Jedi Masters"],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "database",
+        "name": "feature.cisdb.pointforfeiture.enabled",
+        "description": "When set to 'true', if an account has the 'Point Forfeiture On' acct_attribute, new eligible trans actions will  update their 'Forfeiture' date",
+        "default": false,
+        "current": false,
+        "used_by": ["Jedi Masters"],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "CIS",
+        "application": "CSCweb",
+        "name": "feature.cisweb.tokenizecreditcards.enabled",
+        "description": "Enables credit cards to b loaded to CIS database as tokens when loaded from CSCweb",
+        "default": false,
+        "current": false,
+        "used_by": ["Realists"],
+        "affects": ["Realists", "R&R", "Jedi Masters", "A-Team", "S.H.I.E.L.D.", "Hydra", "Kraken"]
+    },
+    {
+        "system": "Message Center",
+        "application": "Message Center",
+        "name": "tokenization",
+        "description": "Enables Message Center to handle tokenized credit cards",
+        "default": false,
+        "current": false,
+        "used_by": ["Realists"],
+        "affects": ["Realists", "A-Team"]
+    },
+    {
+        "system": "Customer Acivity Tracking Service",
+        "application": "Customer Acivity Tracking Service",
+        "name": "feature.glag.customeractivitytracking",
+        "description": "Enables customer tracking for bookings and login",
+        "default": false,
+        "current": false,
+        "used_by": ["Do-Not-DISturb"],
+        "affects": ["Do-Not-DISturb"]
+    },
+    {
+        "system": "RSS",
+        "application": "RSSWeb",
+        "name": "feature.enable.occupancy.based.pricing.optout",
+        "description": "This feature flag displays a checkbox named 'OptOut Occupancy based pricing' for Booking.com in Property info page",
+        "default": false,
+        "current": false,
+        "used_by": ["Wolfpack"],
+        "affects": ["Wolfpack", "100TB", "A-Team", "Hydra"]
+    },
+    {
+        "system": "RSS",
+        "application": "RSS",
+        "name": "TBD",
+        "description": "FlExRewards - Enables a new table for entering point tiers in a seasonal format",
+        "default": null,
+        "current": null,
+        "used_by": ["Hydra"],
+        "affects": ["Wolfpack", "100TB", "A-Team", "Hydra"]
+    },
+    {
+        "system": "Reservation email service",
+        "application": "Reservation email service",
+        "name": "RESERVATION_GUARANTEE_METHOD_FEATURE",
+        "description": "Enables handling for guarantee method in addition to guarantee code",
+        "default": false,
+        "current": true,
+        "used_by": ["Udder Team"],
+        "affects": ["Udder Team", "Jedi Masters"]
+    },
+    {
+        "system": "Reservation email service",
+        "application": "Reservation email service",
+        "name": "RESERVATION_PACKAGE_RATE_FEATURE",
+        "description": "Enables package rate flag inclusion in the output sent to Stringview",
+        "default": false,
+        "current": true,
+        "used_by": ["Udder Team"],
+        "affects": ["Udder Team", "Jedi Masters"]
+    },
+    {
+        "system": "Rates and Inventory",
+        "application": "Rates and Inventory",
+        "name": "GROUP_BOOKING_INVENTORY",
+        "description": "Enables messgae senter properties group inventory",
+        "default": true,
+        "current": true,
+        "used_by": ["Udder Team"],
+        "affects": ["A-Team", "Udder Team"]
+    },
+    {
+        "system": "Rates and Inventory",
+        "application": "Rates and Inventory",
+        "name": "USE_APPLICATION_CREDENTIALS",
+        "description": "Enables the use of application credentials to login to CRS from Rates and Inventory",
+        "default": false,
+        "current": false,
+        "used_by": ["Udder Team"],
+        "affects": ["A-Team", "Udder Team"]
     }
 ]
