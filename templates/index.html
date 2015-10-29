@@ -11,49 +11,42 @@
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/js/app.js"></script>
   </head>
-  <!-- Top level controller is the FlagsController because the SystemsController
-  and ApplicationsController both need to be able to get a reference to the flags
-  controller to set the system and application, which affects the flags displayed. -->
-  <body ng-app="FlagConsole" ng-controller="FlagsController as flags">
+  <!-- Refactored to only have one controller. This simplified the app because all information is
+  now in one place, which is good since it is interrelated - the selected system affects available
+  applications, and the selected application affect displayed flags. -->
+  <body ng-app="FlagConsole" ng-controller="FlagsController as flagsCtrl">
     <div class="container">
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Feature Flag Console</a>
           </div>
-          <!-- The second level controller is the ApplicationsController. The SystemsController needs
-          to be underneath it so that it has a reference to the ApplicationController, so that it
-          can update the system when that is changed and the ApplicationController can load the applications
-          for that new system. -->
-          <div id="navbar" class="navbar-collapse collapse" ng-controller="ApplicationsController as applications">
+          <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <!-- Lowest level controller is the SystemsController -->
-              <li class="dropdown" ng-controller="SystemsController as systems">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[[applications.systemText()]] <span class="caret"></span></a>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[[flagsCtrl.systemText()]] <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <!-- On click must set the system in the application controller to load the right applications,
-                  but must also set the application to null in the FlagsController to void the currently loaded
-                  list of feature flags. -->
-                  <li ng-repeat="system in systems.systems"><a href="#" ng-click="applications.setSystem(system); flags.setApplication(system, null)">[[system]]</a></li>
+                  <li ng-repeat="system in flagsCtrl.systems"><a href="#" ng-click="flagsCtrl.setSystem(system)">[[system]]</a></li>
                 </ul>
               </li>
-              <li class="dropdown" ng-class="{ disabled:applications.system === null }">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[[flags.applicationText()]] <span class="caret"></span></a>
+              <li class="dropdown" ng-class="{ disabled: !flagsCtrl.appDropdownEnabled() }">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[[flagsCtrl.applicationText()]] <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li ng-repeat="app in applications.applications"><a href="#" ng-click="flags.setApplication(applications.system, app)">[[app]]</a></li>
+                  <li ng-repeat="app in flagsCtrl.applications"><a href="#" ng-click="flagsCtrl.setApplication(app)">[[app]]</a></li>
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" ng-submit="flagsCtrl.search()">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search"/>
+                <input type="text" class="form-control" placeholder="Search" ng-model="flagsCtrl.searchText"/>
+                <input type="submit" class="btn btn-default" value="Submit"/>
               </div>
             </form>
           </div>
         </div>
       </nav>
       <div id="flags" class="row list-group">
-        <div class="item col-xs-4 col-lg-4" ng-repeat="flag in flags.flags">
+        <div class="item col-xs-4 col-lg-4" ng-repeat="flag in flagsCtrl.flags">
           <div class="thumbnail">
             <div class="caption">
               <h4 class="group inner list-group-item-heading">[[flag.name]]</h4>
@@ -81,6 +74,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="noresults">
+          <h3 class="noresults" ng-show="flagsCtrl.noSearchResults()">No Results!</h3>
         </div>
       </div>
     </div>

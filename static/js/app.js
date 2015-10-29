@@ -9,52 +9,51 @@
     $interpolateProvider.endSymbol(']]');
   });
 
-  app.controller('SystemsController', ['$http', function($http){
-    var controller = this;
-    controller.systems = [];
+  app.controller('FlagsController', ['$http', function($http){
+    this.systems = [];
+    this.system = null;
+    this.applications = [];
+    this.application = null;
+    this.flags = [];
+    this.searchText = '';
+    this.noResults = false;
 
     $http.get('/api/systems').then(function success(response) {
       controller.systems = response.data.results;
     }, function error(response) {
       alert("Request for /api/systems returned status " + response.status + ".");
     });
-  }]);
 
-  app.controller('ApplicationsController', ['$http', function($http){
     var controller = this;
-    controller.system = null;
-    controller.applications = [];
 
-    controller.setSystem = function(system) {
-      controller.system = system;
-      var url = '/api/apps/' + system;
+    this.setSystem = function(system) {
+      if (system !== controller.system) {
+        controller.system = system;
+        controller.applications = [];
+        controller.application = null;
+        controller.flags = [];
+        controller.noResults = false;
 
-      $http.get(url).then(function success(response) {
-        controller.applications = response.data.results;
-      }, function error(response) {
-        alert("Request for " + url + " returned status " + response.status + ".");
-      });
-    };
+        var url = '/api/apps/' + system;
+        $http.get(url).then(function success(response) {
+          controller.applications = response.data.results;
+        }, function error(response) {
+          alert("Request for " + url + " returned status " + response.status + ".");
+        });
+      }
+    }
 
-    controller.systemText = function() {
+    this.systemText = function() {
       return controller.system === null ? "System" : controller.system;
     };
-  }]);
 
-  app.controller('FlagsController', ['$http', function($http){
-    var controller = this;
-    controller.system = null;
-    controller.application = null;
-    controller.flags = [];
-
-    controller.setApplication = function(system, application) {
-      controller.system = system;
-      controller.application = application;
-
-      if (application == null) {
+    this.setApplication = function(application) {
+      if (application !== controller.application) {
+        controller.application = application;
         controller.flags = [];
-      } else {
-        var url = '/api/flags/' + system + '/' + application;
+        controller.noResults = false;
+
+        var url = '/api/flags/' + controller.system + '/' + application;
         $http.get(url).then(function success(response) {
           controller.flags = response.data.results;
         }, function error(response) {
@@ -63,9 +62,29 @@
       }
     };
 
-    controller.applicationText = function() {
+    this.applicationText = function() {
       return controller.application === null ? "Application" : controller.application;
+    };
+
+    this.appDropdownEnabled = function() {
+      return controller.system != null;
     }
+
+    this.search = function() {
+      $http.get('/api/search', { params: { q: controller.searchText }}).then(function success(response) {
+        controller.system = null;
+        controller.application = null;
+        controller.flags = response.data.results;
+        controller.noResults = response.data.results.length === 0;
+      }, function error(response) {
+          alert("Request for /api/search returned status " + response.status + ".");
+      })
+    }
+
+    this.noSearchResults = function() {
+      return controller.noResults;
+    }
+
   }]);
 
   app.filter('renderstatus', function() {
