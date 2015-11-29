@@ -30,7 +30,7 @@ In Windows:
 A virtualenv is used to keep packages separated. This is more of a best practice then a requirement, but I think it's really nice to have. With this package we can easily manage virtual environments. We can create a virtualenv with ```mkvirtualenv [name]``` or delete one with ```rmvirtualenv [name]```. Probably the most useful is ```workon [name]```. This one is nice because you don't have to be in any specific directory to switch virtualenvs. It just works. If you need some docs, [here ya go!](https://virtualenvwrapper.readthedocs.org/en/latest/).
 
 <b>Getting to the Development:</b>    
-So now that that is set up, navigate to the cloned repo. Make sure you're in your virtualenv (or don't, I'm not your dad) and run: ```pip install -r requirement.stxt```. This will, you guessed it, install our required packages (flask). Boom! You're done! Run ```python app.py``` and go to localhost:5000 to see the hello world app.
+So now that that is set up, navigate to the cloned repo. Make sure you're in your virtualenv (or don't, I'm not your dad) and run: ```pip install -r requirements.txt```. This will, you guessed it, install our required packages (flask). Boom! You're done! Run ```python app.py``` and go to localhost:5000 to see the hello world app.
 
 Vagrant
 =======
