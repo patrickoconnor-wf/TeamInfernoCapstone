@@ -26,3 +26,17 @@ body {
   padding-left: 4px;
   padding-right: 4px;
 }
+
+div.noresults {
+  text-align: center;
+}
+
+h3.noresults {
+  border-radius: 12px;
+  background-color: #FFF0D1;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: inline;
+}
